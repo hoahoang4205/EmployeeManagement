@@ -2,6 +2,7 @@ package com.example.testbackend1.controller;
 
 import com.example.testbackend1.model.Position;
 import com.example.testbackend1.service.PositionService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,7 @@ public class PositionController {
         List<Position> positions = positionService.getAllPositions();
         return new ResponseEntity<>(positions, HttpStatus.OK);
     }
-
+    @Transactional
     // Xóa chức vụ theo positionCode
     @DeleteMapping("/{positionCode}")
     public ResponseEntity<Void> deletePosition(@PathVariable String positionCode) {

@@ -3,6 +3,7 @@ package com.example.testbackend1.controller;
 import com.example.testbackend1.dto.SalaryDTO;
 import com.example.testbackend1.model.Employee;
 import com.example.testbackend1.service.EmployeeService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +40,7 @@ public class EmployeeController {
     public Employee updateEmployee(@PathVariable String employeeId, @RequestBody Employee updatedEmployee) {
         return employeeService.updateEmployee(employeeId, updatedEmployee);
     }
-
+    @Transactional
     // Xóa nhân viên theo ID
     @DeleteMapping("/{employeeId}")
     public void deleteEmployee(@PathVariable String employeeId) {

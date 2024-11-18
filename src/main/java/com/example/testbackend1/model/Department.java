@@ -29,4 +29,6 @@ public class Department {
     public void setDepartmentCode(@Size(max = 3, message = "DptCode chỉ được tối đa 3 ký tự") String departmentCode) {
         this.departmentCode = departmentCode;
     }
+
+
 }

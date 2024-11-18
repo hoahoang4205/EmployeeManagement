@@ -22,7 +22,7 @@ public class AttendanceService {
     }
 
 
-    /// Tính tổng số giờ làm việc của nhân viên trong một khoảng thời gian (tháng)
+    // Tính tổng số giờ làm việc của nhân viên trong một khoảng thời gian (tháng)
     public double calculateTotalHoursWorked(String employeeId, LocalDate startDate, LocalDate endDate) {
         List<Attendance> attendances = attendanceRepository.findByEmployeeEmployeeIdAndDateBetween(employeeId, startDate, endDate);
         double totalHours = 0;

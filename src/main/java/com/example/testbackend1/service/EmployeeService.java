@@ -2,8 +2,12 @@ package com.example.testbackend1.service;
 
 import com.example.testbackend1.dto.SalaryDTO;
 import com.example.testbackend1.model.Attendance;
+import com.example.testbackend1.model.Department;
 import com.example.testbackend1.model.Employee;
+import com.example.testbackend1.model.Position;
 import com.example.testbackend1.repository.EmployeeRepository;
+import com.example.testbackend1.repository.DepartmentRepository;
+import com.example.testbackend1.repository.PositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +24,36 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Autowired
-    private AttendanceService attendanceService;
+    private DepartmentRepository departmentRepository;
 
+    @Autowired
+    private PositionRepository positionRepository;
+
+    @Autowired
+    private AttendanceService attendanceService;
     // Thêm nhân viên mới
     public Employee addEmployee(Employee employee) {
-        String departmentCode = employee.getDepartment().getDepartmentCode();
-        String positionCode = employee.getPosition().getPositionCode();
+        // Lấy departmentId và positionId từ đối tượng
+        Long departmentId = employee.getDepartment() != null ? employee.getDepartment().getId() : null;
+        Long positionId = employee.getPosition() != null ? employee.getPosition().getId() : null;
 
-        long count = employeeRepository.countByDepartmentAndPosition(employee.getDepartment(), employee.getPosition());
+        if (departmentId == null || positionId == null) {
+            throw new RuntimeException("Department or Position cannot be null");
+        }
+
+        // Tìm kiếm department và position từ cơ sở dữ liệu theo ID
+        Department existingDepartment = departmentRepository.findById(departmentId)
+                .orElseThrow(() -> new RuntimeException("Department not found with ID: " + departmentId));
+
+        Position existingPosition = positionRepository.findById(positionId)
+                .orElseThrow(() -> new RuntimeException("Position not found with ID: " + positionId));
+
+        // Lấy departmentCode và positionCode
+        String departmentCode = existingDepartment.getDepartmentCode();
+        String positionCode = existingPosition.getPositionCode();
+
+        long count = employeeRepository.countByDepartmentAndPosition(existingDepartment, existingPosition);
+        // Sử dụng departmentCode và positionCode để tạo employeeId
         String employeeId = departmentCode + positionCode + String.format("%04d", count + 1);
 
         employee.setEmployeeId(employeeId);

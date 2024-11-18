@@ -2,6 +2,7 @@ package com.example.testbackend1.controller;
 
 import com.example.testbackend1.model.Department;
 import com.example.testbackend1.service.DepartmentService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class DepartmentController {
         }
         return new ResponseEntity<>(department, HttpStatus.OK);
     }
-
+    @Transactional
     // Xóa phòng ban theo departmentCode
     @DeleteMapping("/{departmentCode}")
     public ResponseEntity<Void> deleteDepartment(@PathVariable String departmentCode) {
