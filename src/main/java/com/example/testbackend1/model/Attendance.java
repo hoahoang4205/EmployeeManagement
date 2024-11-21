@@ -1,13 +1,17 @@
 package com.example.testbackend1.model;
 
-import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @Entity
@@ -24,4 +28,5 @@ public class Attendance {
     LocalDate date; // ngay cham cong
     LocalDateTime checkIn; // check in
     LocalDateTime checkOut; // check out
+    // double totalHoursWorked;
 }

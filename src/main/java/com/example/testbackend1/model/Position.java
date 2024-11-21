@@ -1,10 +1,7 @@
 package com.example.testbackend1.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -20,6 +17,10 @@ public class Position {
     String positionName;
     @Size(max = 1, message = "PstCode chỉ được tối đa 1 ký tự")
     String positionCode;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    Department department;
 
     public @Size(max = 1, message = "PstCode chỉ được tối đa 1 ký tự") String getPositionCode() {
         return positionCode;

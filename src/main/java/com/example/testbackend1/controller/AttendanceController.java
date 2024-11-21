@@ -25,6 +25,13 @@ public class AttendanceController {
         return new ResponseEntity<>(createdAttendance, HttpStatus.CREATED);
     }
 
+    @GetMapping("/total-hours/{employeeId}/{date}")
+    public ResponseEntity<Double> getTotalHoursWorkedByDate(@PathVariable String employeeId, @PathVariable String date) {
+        LocalDate parsedDate = LocalDate.parse(date); // Chuyển đổi chuỗi ngày thành LocalDate
+        double totalHours = attendanceService.calculateTotalHoursWorkedByDate(employeeId, parsedDate);
+        return new ResponseEntity<>(totalHours, HttpStatus.OK);
+    }
+
     // Lấy danh sách chấm công của nhân viên trong tháng
     @GetMapping("/employee/{employeeId}/{month}/{year}")
     public ResponseEntity<List<Attendance>> getAttendancesByEmployee(@PathVariable String employeeId, @PathVariable int month, @PathVariable int year) {
@@ -34,7 +41,7 @@ public class AttendanceController {
     }
 
     // Lấy tổng số giờ làm việc của nhân viên trong tháng
-    @GetMapping("/total-hours/{employeeId}/{month}/{year}")
+        @GetMapping("/total-hours/{employeeId}/{month}/{year}")
     public ResponseEntity<Double> getTotalHoursWorked(@PathVariable String employeeId, @PathVariable int month, @PathVariable int year) {
         // Tính tổng số giờ làm việc của nhân viên trong tháng và năm
         LocalDate startDate = LocalDate.of(year, month, 1); // Ngày đầu tháng
