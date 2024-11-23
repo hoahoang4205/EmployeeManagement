@@ -77,7 +77,6 @@ public class EmployeeService {
         Employee existingEmployee = employeeRepository.findByEmployeeId(employeeId)
                 .orElseThrow(() -> new RuntimeException("Employee not found with ID: " + employeeId));
 
-        // Cập nhật thông tin
         existingEmployee.setName(updatedEmployee.getName());
         existingEmployee.setDepartment(updatedEmployee.getDepartment());
         existingEmployee.setPosition(updatedEmployee.getPosition());
@@ -89,7 +88,6 @@ public class EmployeeService {
 
     // Xóa nhân viên theo Employee ID
     public void deleteEmployee(String employeeId) {
-        // Kiểm tra nếu nhân viên không tồn tại
         if (!employeeRepository.existsByEmployeeId(employeeId)) {
             throw new RuntimeException("Employee not found with ID: " + employeeId);
         }
@@ -121,6 +119,7 @@ public class EmployeeService {
         return monthlySalaries;
     }
 
+
     public double calculateTotalHoursWorked(String employeeId, int month, int year) {
         // Lấy danh sách chấm công của nhân viên trong tháng và năm đã cho
         List<Attendance> attendances = attendanceService.getAttendancesByEmployee(employeeId, month, year);
@@ -136,7 +135,6 @@ public class EmployeeService {
 
         return totalHours;
     }
-
 
     // Tính toán lương cho từng tháng
     public SalaryDTO getSalaryDTO(String employeeId, Employee employee, double totalHoursWorked) {

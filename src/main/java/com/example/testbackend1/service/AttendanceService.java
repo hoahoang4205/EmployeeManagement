@@ -22,6 +22,14 @@ public class AttendanceService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    public List<Attendance> getAllAttendances() {
+        return attendanceRepository.findAll();
+    }
+
+    public List<Attendance> getAttendancesByEmployee(String employeeId) {
+        return attendanceRepository.findByEmployeeEmployeeId(employeeId);
+    }
+
     public List<Attendance> getAttendancesByEmployee(String employeeId, int month, int year) {
         LocalDate startDate = LocalDate.of(year, month, 1); // Ngày đầu tháng
         LocalDate endDate = startDate.withDayOfMonth(startDate.lengthOfMonth()); // Ngày cuối tháng
@@ -61,7 +69,7 @@ public class AttendanceService {
 
         return totalHours;
     }
-    
+
     public Attendance addAttendance(Attendance attendance) {
         String employeeId = attendance.getEmployee() != null ? attendance.getEmployee().getEmployeeId() : null;
         if (employeeId == null) {
@@ -86,10 +94,10 @@ public class AttendanceService {
             }
         }
 
-        // Nếu cần, bạn có thể gán lại thông tin nhân viên vào attendance ở đây
+
         attendance.setEmployee(existsByEmployee);
 
         return attendanceRepository.save(attendance); // Lưu bản ghi vào cơ sở dữ liệu
     }
-    
+
 }

@@ -2,7 +2,6 @@ package com.example.testbackend1.service;
 
 import com.example.testbackend1.model.Department;
 import com.example.testbackend1.repository.DepartmentRepository;
-import org.aspectj.weaver.loadtime.DefaultWeavingContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

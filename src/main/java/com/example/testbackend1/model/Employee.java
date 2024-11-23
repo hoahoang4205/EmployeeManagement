@@ -23,6 +23,11 @@ public class Employee {
     @JoinColumn(name = "position_id")
     Position position;
 
+    @ManyToOne
+    @JoinColumn(name = "atttendance_id")
+    Attendance attendance;
+
+
     private double basicSalary; // luong co ban
 
 }

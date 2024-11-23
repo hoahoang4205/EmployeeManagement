@@ -40,6 +40,8 @@ public class DepartmentController {
         }
         return new ResponseEntity<>(department, HttpStatus.OK);
     }
+
+
     @Transactional
     // Xóa phòng ban theo departmentCode
     @DeleteMapping("/{departmentCode}")

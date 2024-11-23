@@ -28,5 +28,4 @@ public class Attendance {
     LocalDate date; // ngay cham cong
     LocalDateTime checkIn; // check in
     LocalDateTime checkOut; // check out
-    // double totalHoursWorked;
 }

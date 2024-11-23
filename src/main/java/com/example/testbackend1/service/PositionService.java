@@ -25,10 +25,6 @@ public class PositionService {
         if (departmentId == null ) {
             throw new RuntimeException("Department cannot be null");
         }
-//        // Tim kiem department va position tu csdl
-//        Department existingDepartment = departmentRepository.findById(departmentId)
-//                .orElseThrow(() -> new RuntimeException("Department not found with ID: " + departmentId));
-//        String departmentCode = existingDepartment.getDepartmentCode();
         return positionRepository.save(position);
     }
 

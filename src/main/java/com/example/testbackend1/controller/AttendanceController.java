@@ -25,6 +25,13 @@ public class AttendanceController {
         return new ResponseEntity<>(createdAttendance, HttpStatus.CREATED);
     }
 
+    // Lay tat ca danh sach cham cong
+    @GetMapping
+    public ResponseEntity<List<Attendance>> getAllAttendances() {
+        List<Attendance> attendances = attendanceService.getAllAttendances();
+        return new ResponseEntity<>(attendances, HttpStatus.OK);
+    }
+
     @GetMapping("/total-hours/{employeeId}/{date}")
     public ResponseEntity<Double> getTotalHoursWorkedByDate(@PathVariable String employeeId, @PathVariable String date) {
         LocalDate parsedDate = LocalDate.parse(date); // Chuyển đổi chuỗi ngày thành LocalDate
