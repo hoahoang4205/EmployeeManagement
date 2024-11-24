@@ -26,7 +26,7 @@ public class AttendanceController {
     }
 
     // Lay tat ca danh sach cham cong
-    @GetMapping
+    @GetMapping("/get-all")
     public ResponseEntity<List<Attendance>> getAllAttendances() {
         List<Attendance> attendances = attendanceService.getAllAttendances();
         return new ResponseEntity<>(attendances, HttpStatus.OK);

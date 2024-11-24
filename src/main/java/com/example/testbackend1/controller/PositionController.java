@@ -25,7 +25,7 @@ public class PositionController {
     }
 
     // Lấy tất cả chức vụ
-    @GetMapping
+    @GetMapping("/get-all")
     public ResponseEntity<List<Position>> getAllPositions() {
         List<Position> positions = positionService.getAllPositions();
         return new ResponseEntity<>(positions, HttpStatus.OK);

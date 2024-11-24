@@ -34,10 +34,11 @@ public class EmployeeController {
     }
 
     // Lấy tất cả nhân viên
-    @GetMapping
+    @GetMapping("/get-all")
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
+
 
     // Lấy thông tin nhân viên theo ID
     @GetMapping("/{employeeId}")
